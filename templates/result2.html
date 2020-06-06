@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .content{
+            width:400px;
+            height: 700px;
+            margin: 30px auto;
+            border:1px solid #666;
+            padding:1%;
+
+        }
+        #result{
+            height: 260px;
+            weight: 320px;
+            background-color: #3399ff;
+            color: #fff;
+            padding:1%;
+        }
+        .title-div{
+           width:320px;
+           height:150px;
+        }
+        #code-div{   
+           margin-top:20px;
+           width:320px;
+           height:75px;
+           padding:1%;
+           background-color:#00ccff;  
+        } 
+      .td-name{
+            font-size: 16px;
+        }
+      .file {
+            position: relative;
+            display: inline-block;
+            border-radius: 4px;
+            padding: 4px 10px;
+            overflow: hidden;
+            color: #1E88C7;
+            text-decoration: none;
+            text-indent: 0;
+            line-height: 20px;
+        }
+        .file input {
+            position: absolute;
+            right: 0;
+            top: 0;
+            opacity: 0;
+        }
+        .file:hover {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+          <table>
+            <tr>
+                <td><h3>地摊海报</h3></td>
+            </tr>
+            <tr><td> &nbsp;</td></tr>
+            <tr>
+                <td>
+                    <button type="button" class="btn btn-default">链接海报</button>&nbsp;&nbsp;
+                    <button type="button" class="btn btn-info">收款海报</button>
+                </td>
+            </tr>
+              <tr><td> &nbsp; </td></tr>
+            <tr><td> &nbsp; </td></tr>
+            <tr>
+                <td>
+                    <form id="pic-form" class="form-horizontal" role="form" action="generate_pic", method="post"
+                          enctype="multipart/form-data">
+                        {% csrf_token%}
+                          <table>
+                            <tr>
+                                <td class="td-name">标题 &nbsp;&nbsp;<input type="text"  name="title" value="{{title}}"></td>
+                            </tr>
+                            <tr><td> &nbsp;</td></tr>
+                            <tr>
+                                <td class="td-name">
+                                    <div style="float:left; padding-top:20px;">
+                                        <span>收款码</span>
+                                    </div>
+                                    <div>
+                                    <a href="javascript:;" class="file"><img src="/static/img/ss.png" width="50px">
+                                        <input type="file" name="code_img">
+                                    </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </td>
+            </tr>
+            <tr><td> &nbsp; </td></tr>
+            <tr><td> &nbsp; </td></tr>
+            <tr><td> &nbsp; </td></tr>
+            <tr>
+                <td style="align:center;">
+                    <button type="button" class="btn btn-success" onclick="confirm();">生成海报</button>
+                </td>
+            </tr>
+        </table>
+         <hr/>
+        <div id="result">
+            <div class="title-div" style="line-height:10px;">
+                <div>
+                    <h1>{{ title }}</h1>
+                </div>
+
+                <div id="code-div">
+                    <div style="float:left;">
+                         <img src="/media/upload/{{code_img}}" width="70px" height="70px">&nbsp;&nbsp;
+                    </div>
+                    <div style="width:240px;">
+                           <h4>长按识别二维码打开此网页</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
