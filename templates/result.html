@@ -2,48 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Title</title>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
-        .content{
-            width:500px;
-            height: 400px;
-            margin: 50px auto;
-            <!--border:1px solid #666;-->
-            padding:1%;
-
-        }
-        #result{
-            height: 450px;
-            width: 350px;
-            background-color: {{background}};
-            color: #fff;
-            padding:1%;
-
-        }
-        .title-div{
-           width:320px;
-           height:150px;
-        }
         #link-div{
-           width:500px;
+           width:320px;
            margin:0px 1px;
            z-index:10;
            height:90px;
            padding-top:10px;
            position:absolute;
-           top:350px;
+           top:200px;
         }
         #code-div{   
-           width:500px;
+           width:400px;
            margin:0px 1px;
            z-index:10;
-           height:100px;
+           height:120px;
            padding-top:10px;
            position:absolute;
-           top:450px;
+           top:300px;
            background-color:#F5F5F5;
            opacity:0.67;
            filter:alpha(opacity=67);
@@ -56,29 +37,32 @@
     </style>
 </head>
 <body>
-    <div class="content">
-        <h4><a href="/">重新生成海报</a></h4><br/><hr/>
-        <div id="result">
-            <div >
-                <div class="title-div" style="line-height:10px;">
-                    <h1>{{ title }}</h1>
-                </div>
+    <div class="container">
+        <div class="panel panel-default" style="background-color: {{background}};color:#fff; height:450px;">
+            <div class="panel-body">
+                 <div >
+                        <div class="title-div">
+                            <h1>{{ title }}</h1>
+                        </div>
 
-                <div id="link-div">
-                    <div><h4>{{link_name}}</h4></div>
-                    <div style="font-size:10px;">{{link_url}}</div>
-                </div>
+                        <div id="link-div">
+                            <div><h4>{{link_name}}</h4></div>
+                            <div style="font-size:10px;">{{link_url}}</div>
+                        </div>
 
-                <div id="code-div">
-                    <div style="float:left;">
-                        <img src="{{qrcode}}" width="85px">&nbsp;&nbsp;
+                        <div id="code-div">
+                            <div style="float:left;">
+                                <img src="{{qrcode}}" width="100px">&nbsp;&nbsp;
+                            </div>
+                            <div style="width:320px;">
+                                   <h4>长按识别二维码打开链接</h4>
+                            </div>
+                        </div>
                     </div>
-                    <div style="width:240px;">
-                           <h4>长按识别二维码打开链接</h4>
-                    </div>
-                </div>
             </div>
-        </div>
+</div>
+
+
     </div>
 </body>
 </html>
