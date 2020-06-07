@@ -43,21 +43,24 @@
         <div class="panel panel-default" style="background-color: {{background}};color:#fff; height:450px;position:relative;">
             <div class="panel-body">
                  <div >
-                        <div class="title-div">
+                        <div class="title-div" style="font-family: Microsoft Yahei;">
                             <h1>{{ title }}</h1>
                         </div>
 
+                        {% if link_url %}
                         <div id="link-div">
                             <div><h4>{{link_name}}</h4></div>
                             <div style="font-size:10px;">{{link_url}}</div>
                         </div>
+                        {% endif %}
+
 
                         <div id="code-div">
                             <div style="float:left;">
                                 <img src="{{qrcode}}" width="100px">&nbsp;&nbsp;
                             </div>
-                            <div style="width:320px;">
-                                   <h4>长按识别二维码打开链接</h4>
+                            <div style="width:320px; margin-left:1%;">
+                                   <h4>{{prompt}}</h4>
                             </div>
                         </div>
                     </div>

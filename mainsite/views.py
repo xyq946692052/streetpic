@@ -17,7 +17,7 @@ def generate_pic(request):
     title = request.POST.get('title', None)
     link_url = request.POST.get('link_url', None)
     link_name = request.POST.get('link_name', None)
-    upload_qrcode = request.FILES.get('qrcode', None)
+    upload_qrcode = request.FILES.get('upload_qrcode', None)
     background = request.POST.get('background', None)
 
     now = datetime.now().strftime('%Y%m%d%H%M%S')
@@ -28,22 +28,26 @@ def generate_pic(request):
             gen_qrcode_img.save(f)
 
     if upload_qrcode:
+        upload_qrcode_name = now+"_"+upload_qrcode.name
+        upload_path = 'media/upload_qrcode/' +upload_qrcode_name
+        with open('%s.png' % upload_path, 'wb') as f:
+            for line in upload_qrcode.chunks():
+                f.write(line)
         if upload_qrcode.name.split('.')[-1] not in ['jpeg', 'jpg', 'png']:
             return HttpResponse('上传的文件必须是图片')
-    params = {
-        'title': title,
-        'link_url': link_url,
-        'link_name': link_name,
-        'qrcode': qrcode,
-        'background': background
-    }
-    #Strpic.objects.create(**params)
+
     context = dict()
     context['title'] = title
-    context['qrcode'] = qrcode
     context['background'] = background
-    context['link_url'] = link_url
-    context['link_name'] = link_name
+
+    if upload_qrcode:
+        context['prompt'] = '长按或扫一扫进行付款'
+        context['qrcode'] = '/media/upload_qrcode/' + upload_qrcode_name
+        print('***********', context['qrcode'])
+
     if link_url:
+        context['link_url'] = link_url
+        context['link_name'] = link_name
+        context['prompt'] = '长按识别二维码打开链接'
         context['qrcode'] = '/media/generate_qrcode/'+link_name+"_"+now+'.png'
     return render(request, 'result.html', context)
