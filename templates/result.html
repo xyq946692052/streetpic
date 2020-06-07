@@ -28,7 +28,7 @@
            position:absolute;
            bottom:30px;
            background-color:#F5F5F5;
-           opacity:0.67;
+           opacity:0.87;
            filter:alpha(opacity=67);
            color: #696969;
         } 
@@ -53,7 +53,7 @@
         <br>
         <h4><a href="/">重新生成海报</a> &nbsp;&nbsp;<button class="btn btn-info" onclick="test();">生成图片</button></h4><br/><hr/>
 
-        <div class="panel panel-default" id="haibao" style="background-color: {{background}};color:#fff; width:330px;height:450px;position:relative;">
+        <div class="panel panel-default" id="haibao" style="background-color: {{background}};color:#fff; width:335px;height:450px;position:relative;">
             <div class="panel-body">
                 <div >
                      <div class="title-div" style="font-family: Microsoft Yahei;">
@@ -68,7 +68,7 @@
                      {% endif %}
 
                      <div id="code-div">
-                         <div style="float:left;">
+                         <div style="float:left; margin-left:5px;">
                              <img src="{{qrcode}}" width="100px" height="100px">&nbsp;&nbsp;
                          </div>
                          <div style="width:300px; margin-left:1%;">
