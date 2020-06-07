@@ -30,7 +30,7 @@ def generate_pic(request):
     if upload_qrcode:
         upload_qrcode_name = now+"_"+upload_qrcode.name
         upload_path = 'media/upload_qrcode/' +upload_qrcode_name
-        with open('%s.png' % upload_path, 'wb') as f:
+        with open(upload_path, 'wb') as f:
             for line in upload_qrcode.chunks():
                 f.write(line)
         if upload_qrcode.name.split('.')[-1] not in ['jpeg', 'jpg', 'png']:
@@ -43,7 +43,6 @@ def generate_pic(request):
     if upload_qrcode:
         context['prompt'] = '长按或扫一扫进行付款'
         context['qrcode'] = '/media/upload_qrcode/' + upload_qrcode_name
-        print('***********', context['qrcode'])
 
     if link_url:
         context['link_url'] = link_url
