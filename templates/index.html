@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-{% load staticfiles %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,16 +6,12 @@
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <style>
-        .content{
-            width:400px;
-            height: 600px;
-            margin: 30px auto;
-            border:1px solid #666;
-            padding:1%;
-        }
-        .td-name{
-            font-size: 16px;
+        .title-input{
+          width:300px;
+          border:none;
+          border-bottom: #c0c0c0 1px solid;
         }
         .file {
             position: relative;
@@ -40,62 +35,77 @@
         }
     </style>
     <script>
-        function confirm(){
-            $("#pic-form").submit();
+        function view_link(){
+            var qrcode_div = $("#qrcode-div");
+            var link_div = $("#link-div");
+            link_div.css('display','block');
+            qrcode_div.css('display','none');
+
+        }
+
+        function view_qrcode(){
+            var qrcode_div = $("#qrcode-div");
+            var link_div = $("#link-div");
+            link_div.css('display','none');
+            qrcode_div.css('display','block');
+
         }
     </script>
 </head>
 <body>
-    <div class="content">
-        <table>
-            <tr>
-                <td><h3>地摊海报</h3></td>
-            </tr>
-            <tr><td> &nbsp;</td></tr>
-            <tr>
-                <td>
-                    <button type="button" class="btn btn-default">链接海报</button>&nbsp;&nbsp;
-                    <button type="button" class="btn btn-info">收款海报</button>
-                </td>
-            </tr>
-              <tr><td> &nbsp; </td></tr>
-            <tr><td> &nbsp; </td></tr>
-            <tr>
-                <td>
-                    <form id="pic-form" class="form-horizontal" role="form" action="generate_pic", method="post"
-                          enctype="multipart/form-data">
-                        {% csrf_token%}
-                          <table>
-                            <tr>
-                                <td class="td-name">标题 &nbsp;&nbsp;<input type="text"  name="title"></td>
-                            </tr>
-                            <tr><td> &nbsp;</td></tr>
-                            <tr>
-                                <td class="td-name">
-                                    <div style="float:left; padding-top:20px;">
-                                        <span>收款码</span>
-                                    </div>
-                                    <div>
-                                    <a href="javascript:;" class="file"><img src="/static/img/ss.png" width="50px">
-                                        <input type="file" name="code_img">
-                                    </a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </form>
-                </td>
-            </tr>
-            <tr><td> &nbsp; </td></tr>
-            <tr><td> &nbsp; </td></tr>
-            <tr><td> &nbsp; </td></tr>
-            <tr>
-                <td style="align:center;">
-                    <button type="button" class="btn btn-success" onclick="confirm();">生成海报</button>
-                </td>
-            </tr>
-        </table>
-
+     <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>地摊海报</h3>
     </div>
+    <div class="panel-body">
+        <button type="button" class="btn btn-default" onclick="view_link();">链接海报</button>&nbsp;&nbsp;
+        <button type="button" class="btn btn-info" onclick="view_qrcode();">收款海报</button>
+    </div>
+
+    <ul class="list-group">
+        <li class="list-group-item">
+            <div class="form-group" style="height: 30px;">
+                <label for="lastname" class="col-sm-2 control-label">标题</label>
+                <div class="col-sm-10">
+                    <input type="text" class="title-input">
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="form-group" style="height: 30px;" id="link-div">
+                <label for="lastname" class="col-sm-2 control-label">链接</label>
+                <div class="col-sm-10">
+                    <input type="text" class="title-input">
+                </div>
+            </div>
+            <div class="form-group" style="height: 30px; display:none;" id="qrcode-div">
+                <label for="lastname" class="col-sm-2 control-label">收款码</label>
+                <div class="col-sm-10">
+                        <input type="file" name="code_img">
+                </div>
+            </div>
+        </li>
+
+        <li class="list-group-item">
+            <div style="height:50px;">
+              <label for="lastname" class="col-sm-2 control-label">背景图</label>
+                <div class="col-sm-10">
+
+             <select class="form-control" style="width:100px;">
+                <option style="background-color:#1E90FF;" value="#1E90FF">道奇蓝 </option>
+                <option style="background-color:#708090;" value="#708090">石板灰 </option>
+                <option style="background-color:#008B8B;" value="#008B8B">暗青色 </option>
+                <option style="background-color:#2E8B57" value="#2E8B57">海洋绿 </option>
+                <option style="background-color:#006400" value="#006400">暗绿色 </option>
+            </select>
+                </div>
+            </div>
+        </li>
+
+
+
+    </ul>
+         <button type="button" class="btn btn-success" style="margin-top:50px; margin-left:1%; margin-bottom:1%; ">生成海报</button>
+</div>
 </body>
 </html>
