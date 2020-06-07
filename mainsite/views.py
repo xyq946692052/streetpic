@@ -37,7 +37,7 @@ def generate_pic(request):
             return HttpResponse('上传的文件必须是图片')
 
     context = dict()
-    context['title'] = title
+    context['title'] = title[:26] if title else None
     context['background'] = background
 
     if upload_qrcode:
@@ -45,7 +45,7 @@ def generate_pic(request):
         context['qrcode'] = '/media/upload_qrcode/' + upload_qrcode_name
 
     if link_url:
-        context['link_url'] = link_url
+        context['link_url'] = link_url[:56]
         context['link_name'] = link_name
         context['prompt'] = '长按识别二维码打开链接'
         context['qrcode'] = '/media/generate_qrcode/'+link_name+"_"+now+'.png'
