@@ -12,18 +12,25 @@ def index(request):
 
 def generate_pic(request):
     title = request.POST.get('title', None)
-    code_img = request.FILES.get('code_img', None)
-    file_name = ''
-    if code_img:
-        file_name = code_img
-        if code_img.name.split('.')[-1] not in ['jpeg', 'jpg', 'png']:
-            return HttpResponse('输入文件有误')
+    link_url = request.POST.get('link_url', None)
+    link_name = request.POST.get('link_name', None)
+    qrcode = request.FILES.get('qrcode', None)
+    background = request.POST.get('background', None)
+    if qrcode:
+        if qrcode.name.split('.')[-1] not in ['jpeg', 'jpg', 'png']:
+            return HttpResponse('上传的文件必须是图片')
     params = {
         'title': title,
-        'pic_url': file_name
+        'link_url': link_url,
+        'link_name': link_name,
+        'qrcode': qrcode,
+        'background': background
     }
     Strpic.objects.create(**params)
     context = dict()
     context['title'] = title
-    context['code_img'] = code_img
+    context['qrcode'] = qrcode
+    context['background'] = background
+    context['link_url'] = link_url
+    context['link_name'] = link_name
     return render(request, 'result.html', context)
