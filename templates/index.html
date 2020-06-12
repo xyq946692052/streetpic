@@ -4,116 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>海报生成器</title>
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/css/weui.min.css">
+    <link rel="stylesheet" href="/static/css/jquery-weui.min.css">
 
-    <style>
-        .title-input{
-          width:300px;
-          border:none;
-          border-bottom: #c0c0c0 1px solid;
-        }
-        .file {
-            position: relative;
-            display: inline-block;
-            border-radius: 4px;
-            padding: 4px 10px;
-            overflow: hidden;
-            color: #1E88C7;
-            text-decoration: none;
-            text-indent: 0;
-            line-height: 20px;
-        }
-        .file input {
-            position: absolute;
-            right: 0;
-            top: 0;
-            opacity: 0;
-        }
-        .file:hover {
-            text-decoration: none;
-        }
-    </style>
-    <script>
-        function view_link(){
-            var qrcode_div = $("#qrcode-div");
-            var link_div = $("#link-div");
-            var link_name_div = $("#link-name-div");
-            link_div.css('display','block');
-            link_name_div.css('display','block');
-            qrcode_div.css('display','none');
-        }
-        function view_qrcode(){
-            var qrcode_div = $("#qrcode-div");
-            var link_div = $("#link-div");
-            var link_name_div = $("#link-name-div");
-            $("#link_url").val("");
-            $("#link_name").val("");
-            link_div.css('display','none');
-            link_name_div.css('display','none');
-            qrcode_div.css('display','block');
-        }
-        function confirm(){
-            $("#pic-form").submit();
-        }
-    </script>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/jquery-weui.min.js"></script>
+
+<script>
+   function view_link(){
+        var qrcode_div = $("#qrcode-div");
+        var link_name_div = $("#link-name-div");
+        link_name_div.css('display','block');
+        qrcode_div.css('display','none');
+   }
+
+   function view_qrcode(){
+        var qrcode_div = $("#qrcode-div");
+        var link_name_div = $("#link-name-div");
+        link_name_div.css('display','none');
+        qrcode_div.css('display','block');
+    }
+
+    function confirm(){
+        $("#pic-form").submit();
+    }
+</script>
+
 </head>
-<body>
-<div class="container">
-    <form id="pic-form" class="form-horizontal" role="form" action="generate_pic", method="post"
+<body style="background-color: #FAFAFA;">
+
+<form id="pic-form" class="form-horizontal" role="form" action="generate_pic", method="post"
                           enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3>地摊海报</h3>
-        </div>
-        <div class="panel-body">
-            <button type="button" class="btn btn-default" onclick="view_link();">链接海报</button>&nbsp;&nbsp;
-            <button type="button" class="btn btn-info" onclick="view_qrcode();">收款海报</button>
-        </div>
+    {% csrf_token %}
 
-        <ul class="list-group">
-            <li class="list-group-item">
-                <br/>
-                <div class="form-group" style="height: 30px;">
-                    <label for="title" class="col-sm-2 control-label">标题</label>
-                    <div class="col-sm-10">
-                        <input type="text" name="title" class="title-input" placeholder="内容限25个字">
-                    </div>
-                    <br/>
-                </div>
+    <div style="padding-top:8%; width:80%; letter-spacing:4px;margin: 0 auto;">
 
-                <div class="form-group" style="height: 30px;" id="link-div">
-                       <br/>
-                    <label for="link" class="col-sm-2 control-label">链接</label>
-                    <div class="col-sm-10">
-                        <input type="text" id="link_url" name="link_url" class="title-input">
+    <div class="weui-flex" >
+        <div style="margin: 0 auto;"><h2 style="color:#696969;">地摊海报</h2></div>
+    </div>
+
+    <hr style="background:#F5F5F5;height: 2px;border:none; margin-top:2px;"/><br>
+    <div class="weui-flex" style="padding-top:5%; text-align:center;">
+        <div class="weui-flex__item"><a href="javascript:;" class="weui-btn weui-btn_default" style="width:90%;" onclick="view_link();">链接海报</a></div>
+        <div class="weui-flex__item"><a href="javascript:;" class="weui-btn weui-btn_primary" style="width:90%; background-color:#C0C0C0" onclick="view_qrcode();">收款海报</a></div>
+    </div>
+
+    <div class="weui-flex">
+        <div class="weui-flex__item">
+            <div class="weui-cells weui-cells_form">
+
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">标题</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input" type="text" placeholder="仅限25字数" name="title">
                     </div>
-                    <br/>
                 </div>
 
-                <div class="form-group" style="height: 30px;" id="link-name-div">
-                       <br/><br/>
-                    <label for="link" class="col-sm-2 control-label">链接名</label>
-                    <div class="col-sm-10">
-                        <input type="text" id="link_name" name="link_name" class="title-input">
+                <div id="link-name-div">
+                    <div class="weui-cell" style="margin-top:5%;" >
+                        <div class="weui-cell__hd"><label class="weui-label">链接</label></div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" type="text" placeholder="输入链接" name="link_url">
+                        </div>
                     </div>
-                     <br/><br/>
                 </div>
-                <div class="form-group" style="height: 30px; display:none;" id="qrcode-div">
-                       <br/>
-                    <label for="qrcode" class="col-sm-2 control-label">收款码</label>
-                    <div class="col-sm-10">
-                        <input type="file" name="upload_qrcode">
+
+                <div id="qrcode-div" style="display:none;">
+                    <div class="weui-cell" style="margin-top:5%;" >
+                        <div class="weui-cell__hd"><label class="weui-label">收款码</label></div>
+                        <div class="weui-cell__bd">
+                             <div class="weui-uploader__input-box">
+                                <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="" name="upload_qrcode">
+                             </div>
+                        </div>
                     </div>
-                    <br/><br/>
                 </div>
-                 <div style="height:100px;">
-                     <br/> <br/>  <br/>
-                    <label for="background" class="col-sm-2 control-label">背景图</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" style="width:90px;height:40px;" name="background" >
+
+                <div class="weui-cell" style="margin-top:5%;">
+                    <div class="weui-cell__hd"><label class="weui-label">背景图</label></div>
+                    <div class="weui-cell__bd">
+                          <select class="form-control" style="width:90px;height:40px;" name="background" >
                             <option style="background-color:#1E90FF;" value="#1E90FF">道奇蓝 </option>
                             <option style="background-color:#5F9EA0;" value="#5F9EA0">军服蓝 </option>
                             <option style="background-color:#008B8B;" value="#008B8B">暗青色 </option>
@@ -122,24 +92,25 @@
                             <option style="background-color:#FF4500" value="#FF4500">橙红色 </option>
                             <option style="background-color:#A0522D" value="#A0522D">黄土赭 </option>
                             <option style="background-color:#8B008B" value="#8B008B">深洋红色 </option>
-
                             <option style="background-color:#708090;" value="#708090">石板灰 </option>
                             <option style="background-color:#2F4F4F" value="#2F4F4F">深石板灰 </option>
-
                             <option style="background-color:#000000" value="#000000">纯黑 </option>
                         </select>
                     </div>
-                    <br/><br/>
                 </div>
-                <br/>
-                <button type="button" class="btn btn-success" style="margin-top:50px; margin-left:1%; margin-bottom:1%;" onclick="confirm();">生成海报</button>
-            </li>
+
+            </div>
+         </div>
+    </div>
+
+    <div style="margin-top:20%;">
+        <a href="javascript:;" class="weui-btn weui-btn_primary" style=" width:88%;" onclick="confirm();">生成海报</a>
+    </div>
+
+    </div>
+</form>
 
 
-        </ul>
 
-</div>
-    </form>
-</div>
 </body>
 </html>

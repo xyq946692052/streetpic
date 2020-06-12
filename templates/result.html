@@ -2,25 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="user-scalable=no" />
     <title>海报生成器</title>
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/css/weui.min.css">
+    <link rel="stylesheet" href="/static/css/jquery-weui.min.css">
 
-    <script src="http://html2canvas.hertzen.com/dist/html2canvas.js"></script>
-    <style>
-        #link-div{
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/jquery-weui.min.js"></script>
+    <script src="/static/js/html2canvas.js"></script>
+
+<style>
+       #link-div{
            width:320px;
            margin:0px 1px;
            z-index:10;
            height:90px;
            padding-top:10px;
+           padding-right:10px;
            position:absolute;
            bottom: 150px;
         }
         #code-div{   
-           width:320px;
+           width:90%;
            margin:0px 1px;
            z-index:10;
            height:120px;
@@ -32,31 +35,55 @@
            filter:alpha(opacity=67);
            color: #696969;
         } 
-      .td-name{
-            font-size: 16px;
-        }
+</style>
+<script>
 
-    </style>
-    <script>
-        function test() {
 
-            html2canvas(document.querySelector("#haibao")).then(canvas => {
-                document.body.appendChild(canvas)
-            });
-            $("#haibao").css("display", "none");
-        }
+function gener_pic(){
+     $("#img").css("display", "block");
+    //要转换为图片的dom对象
+    var element = document.querySelector('#haibao');
+    //要显示图片的img标签
+    var image = document.querySelector('#img');
+    //调用html2image方法
+    html2image(element,image);
 
-    </script>
+
+    function html2image(source,image) {
+        html2canvas(source).then(function(canvas) {
+            var imageData = canvas.toDataURL(1);
+            image.src = imageData;
+    });
+    }
+     $("#haibao").css("display", "none");
+	}
+
+</script>
+
 </head>
-<body>
-    <div class="container">
-        <br>
-        <h4><a href="/">重新生成海报</a> &nbsp;&nbsp;<button class="btn btn-info" onclick="test();">生成图片</button></h4><br/><hr/>
+<body style="background-color: #FAFAFA;">
 
-        <div class="panel panel-default" id="haibao" style="background-color: {{background}};color:#fff; width:335px;height:450px;position:relative;">
+
+<div style="padding-top:8%; width:80%; letter-spacing:4px;margin: 0 auto;">
+
+    <div class="weui-flex" >
+        <div style="margin: 0 auto;"><h2 style="color:#696969;">地摊海报</h2></div>
+    </div>
+
+    <hr style="background:#F5F5F5;height: 2px;border:none; margin-top:2px;"/><br>
+    <div class="weui-flex" style="padding-top:5%; text-align:center;">
+        <div class="weui-flex__item"><a href="/" class="weui-btn weui-btn_default" style="width:90%;" >重新生成</a></div>
+        <div class="weui-flex__item"><a href="javascript:;" class="weui-btn weui-btn_primary" style="width:90%; background-color:#C0C0C0" onclick="gener_pic();">转成图片</a></div>
+    </div>
+
+
+        <div style="margin: 2% auto;">
+             <img id="img" class="img" width="100%" style="display:none;"/>
+        </div>
+        <div id="haibao" style="background-color: {{background}};color:#fff; width:90%;height:600px;position:relative; margin: 2% auto; padding:5%;">
             <div class="panel-body">
                 <div >
-                     <div class="title-div" style="font-family: Microsoft Yahei; margin-top: -20px;">
+                     <div class="title-div" style="font-family: Microsoft Yahei;">
                          <h1 style="line-height:1.5;">{{ title }}</h1>
                      </div>
 
@@ -71,7 +98,7 @@
                          <div style="float:left; margin-left:5px;">
                              <img src="{{qrcode}}" width="100px" height="100px">&nbsp;&nbsp;
                          </div>
-                         <div style="width:300px; margin-left:1%;">
+                         <div style="margin-left:1%;">
                              <h4>{{prompt}}</h4>
                          </div>
                      </div>
@@ -79,7 +106,7 @@
             </div>
         </div>
 
-    </div>
+</div>
 
 </body>
 </html>

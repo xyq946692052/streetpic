@@ -1,130 +1,113 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <style>
-        .content{
-            width:400px;
-            height: 700px;
-            margin: 30px auto;
-            border:1px solid #666;
-            padding:1%;
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
 
-        }
-        #result{
-            height: 260px;
-            weight: 320px;
-            background-color: #3399ff;
-            color: #fff;
-            padding:1%;
-        }
-        .title-div{
+<!-- body 最后 -->
+<script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+	<script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.js"></script>
+    <style>
+           #link-div{
            width:320px;
-           height:150px;
+           margin:0px 1px;
+           z-index:10;
+           height:90px;
+           padding-top:10px;
+           position:absolute;
+           bottom: 150px;
         }
         #code-div{   
-           margin-top:20px;
            width:320px;
-           height:75px;
-           padding:1%;
-           background-color:#00ccff;  
+           margin:0px 1px;
+           z-index:10;
+           height:120px;
+           padding-top:10px;
+           position:absolute;
+           bottom:30px;
+           background-color:#F5F5F5;
+           opacity:0.87;
+           filter:alpha(opacity=67);
+           color: #696969;
         } 
-      .td-name{
-            font-size: 16px;
-        }
-      .file {
-            position: relative;
-            display: inline-block;
-            border-radius: 4px;
-            padding: 4px 10px;
-            overflow: hidden;
-            color: #1E88C7;
-            text-decoration: none;
-            text-indent: 0;
-            line-height: 20px;
-        }
-        .file input {
-            position: absolute;
-            right: 0;
-            top: 0;
-            opacity: 0;
-        }
-        .file:hover {
-            text-decoration: none;
-        }
+      .content{
+             padding-top:8%;
+             width:80%;
+             letter-spacing:4px;
+             margin: 0 auto;">
+      }
+			
     </style>
 </head>
 <body>
-    <div class="content">
-          <table>
-            <tr>
-                <td><h3>地摊海报</h3></td>
-            </tr>
-            <tr><td> &nbsp;</td></tr>
-            <tr>
-                <td>
-                    <button type="button" class="btn btn-default">链接海报</button>&nbsp;&nbsp;
-                    <button type="button" class="btn btn-info">收款海报</button>
-                </td>
-            </tr>
-              <tr><td> &nbsp; </td></tr>
-            <tr><td> &nbsp; </td></tr>
-            <tr>
-                <td>
-                    <form id="pic-form" class="form-horizontal" role="form" action="generate_pic", method="post"
-                          enctype="multipart/form-data">
-                        {% csrf_token%}
-                          <table>
-                            <tr>
-                                <td class="td-name">标题 &nbsp;&nbsp;<input type="text"  name="title" value="{{title}}"></td>
-                            </tr>
-                            <tr><td> &nbsp;</td></tr>
-                            <tr>
-                                <td class="td-name">
-                                    <div style="float:left; padding-top:20px;">
-                                        <span>收款码</span>
-                                    </div>
-                                    <div>
-                                    <a href="javascript:;" class="file"><img src="/static/img/ss.png" width="50px">
-                                        <input type="file" name="code_img">
-                                    </a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </form>
-                </td>
-            </tr>
-            <tr><td> &nbsp; </td></tr>
-            <tr><td> &nbsp; </td></tr>
-            <tr><td> &nbsp; </td></tr>
-            <tr>
-                <td style="align:center;">
-                    <button type="button" class="btn btn-success" onclick="confirm();">生成海报</button>
-                </td>
-            </tr>
-        </table>
-         <hr/>
-        <div id="result">
-            <div class="title-div" style="line-height:10px;">
-                <div>
-                    <h1>{{ title }}</h1>
-                </div>
 
-                <div id="code-div">
-                    <div style="float:left;">
-                         <img src="/media/upload/{{code_img}}" width="70px" height="70px">&nbsp;&nbsp;
-                    </div>
-                    <div style="width:240px;">
-                           <h4>长按识别二维码打开此网页</h4>
-                    </div>
+ 
+<div class="content">
+
+      <div class="weui-flex" >
+        <div style="margin: 0 auto;"><h3><a href="/">重新生成海报</a> &nbsp;&nbsp;<button class="btn btn-info" onclick="gener_pic();">生成图片</button></h3><br/><hr/></div>
+     </div>
+
+     <div class="weui-flex">
+         <div style=" margin: 2% auto;">
+             <img id="img" class="img" width="80%" style="display:none;"/>
+         </div>
+     </div>
+
+    <div class="weui-flex">
+
+     <div id="haibao" style="background-color: {{background}};color:#fff; width:335px;height:450px;position:relative; margin: 2% auto;">
+            <div class="panel-body">
+                <div >
+                     <div class="title-div" style="font-family: Microsoft Yahei;">
+                         <h1 style="line-height:1.5;">{{ title }}</h1>
+                     </div>
+
+                     {% if link_url %}
+                        <div id="link-div">
+                            <div><h4>{{link_name}}</h4></div>
+                            <div style="font-size:10px;">{{link_url}}</div>
+                        </div>
+                     {% endif %}
+
+                     <div id="code-div">
+                         <div style="float:left; margin-left:5px;">
+                             <img src="{{qrcode}}" width="100px" height="100px">&nbsp;&nbsp;
+                         </div>
+                         <div style="width:300px; margin-left:1%;">
+                             <h4>{{prompt}}</h4>
+                         </div>
+                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+ 
+<script>
+ 
+function gener_pic(){
+     $("#img").css("display", "block");
+    //要转换为图片的dom对象
+    var element = document.querySelector('#haibao');
+    //要显示图片的img标签
+    var image = document.querySelector('#img');
+    //调用html2image方法
+    html2image(element,image);
+
+
+    function html2image(source,image) {
+        html2canvas(source).then(function(canvas) {
+            var imageData = canvas.toDataURL(1);
+            image.src = imageData;
+    });
+    }
+     $("#haibao").css("display", "none");
+	}
+</script>
 </body>
 </html>

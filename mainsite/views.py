@@ -16,14 +16,13 @@ def generate_pic(request):
 
     title = request.POST.get('title', None)
     link_url = request.POST.get('link_url', None)
-    link_name = request.POST.get('link_name', None)
     upload_qrcode = request.FILES.get('upload_qrcode', None)
     background = request.POST.get('background', None)
 
     now = datetime.now().strftime('%Y%m%d%H%M%S')
     if link_url:
         gen_qrcode_img = qrcode.make(link_url)
-        gen_qrcode_name = os.path.join(settings.MEDIA_ROOT, 'generate_qrcode', link_name+"_"+now).replace('\\', '/')
+        gen_qrcode_name = os.path.join(settings.MEDIA_ROOT, 'generate_qrcode', title[:5]+ "_"+now).replace('\\', '/')
         with open('%s.png' % gen_qrcode_name, 'wb') as f:
             gen_qrcode_img.save(f)
 
@@ -46,7 +45,6 @@ def generate_pic(request):
 
     if link_url:
         context['link_url'] = link_url[:50]
-        context['link_name'] = link_name
         context['prompt'] = '长按识别二维码打开链接'
-        context['qrcode'] = '/media/generate_qrcode/'+link_name+"_"+now+'.png'
+        context['qrcode'] = '/media/generate_qrcode/'+title[:5]+"_"+now+'.png'
     return render(request, 'result.html', context)
