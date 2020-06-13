@@ -18,7 +18,7 @@ def generate_pic(request):
     title = request.POST.get('title', None) or '地摊海报神器'
     link_url = request.POST.get('link_url', None) or '欢迎使用海报生成器'
     upload_qrcode = request.FILES.get('upload_qrcode', None)
-    background = request.POST.get('background', None)
+    background = request.POST.get('background', None) or '#1E90FF'
     now = datetime.now().strftime('%Y%m%d%H%M%S')
 
     if upload_qrcode:
