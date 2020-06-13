@@ -40,7 +40,7 @@
 <script>
 
 
-function gener_pic(){
+window.onload = function(){
      $("#img").css("display", "block");
     //要转换为图片的dom对象
     var element = document.querySelector('#haibao');
@@ -78,7 +78,6 @@ function gener_pic(){
 
     <div class="weui-flex" style="padding-top:1%; text-align:center;">
         <div class="weui-flex__item" style="height:100px; width:400px;"><a href="/" id="reback" class="weui-btn weui-btn_default" style="height:100px; width:400px; font-size:2.5em;background-color:#009933" >重新生成</a></div>
-        <div class="weui-flex__item" style="height:100px; width:400px;"><a id="gener-pic" href="javascript:;" class="weui-btn weui-btn_default" style="height:100px; width:400px;font-size:2.5em; color:#000;" onclick="gener_pic();">转成图片</a></div>
     </div>
 
     <div style="margin:2% auto;padding:3%;">
