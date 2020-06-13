@@ -15,8 +15,8 @@ def index(request):
 
 def generate_pic(request):
 
-    title = request.POST.get('title', '地摊海报神器')
-    link_url = request.POST.get('link_url', '欢迎使用海报生成器')
+    title = request.POST.get('title', None)
+    link_url = request.POST.get('link_url', None) or '欢迎使用海报生成器'
     upload_qrcode = request.FILES.get('upload_qrcode', None)
     background = request.POST.get('background', None)
     now = datetime.now().strftime('%Y%m%d%H%M%S')
@@ -36,7 +36,7 @@ def generate_pic(request):
             gen_qrcode_img.save(f)
 
     params = {
-        'title': title,
+        'title': title if title else '地摊海报神器',
         'link_url': link_url,
         'qrcode': upload_qrcode,
         'background': background
