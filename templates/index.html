@@ -28,6 +28,13 @@
     function confirm(){
         $("#pic-form").submit();
     }
+
+   $(function() {
+        $("#background").change(function(){
+            $("#view-bgcolor").css("background-color",$(this).val() )
+        });
+    });
+
 </script>
 
 </head>
@@ -45,8 +52,8 @@
 
     <hr style="background:#F5F5F5;height: 2px;border:none; margin-top:2px;"/><br>
     <div class="weui-flex" style="padding-top:5%; text-align:center;">
-        <div class="weui-flex__item"><a href="javascript:;" class="weui-btn weui-btn_default" style="width:90%;" onclick="view_link();">链接海报</a></div>
-        <div class="weui-flex__item"><a href="javascript:;" class="weui-btn weui-btn_primary" style="width:90%; background-color:#C0C0C0" onclick="view_qrcode();">收款海报</a></div>
+        <div class="weui-flex__item"><a href="javascript:;" class="weui-btn weui-btn_default" style="width:90%;background-color:#7FFFAA" onclick="view_link();">链接海报</a></div>
+        <div class="weui-flex__item"><a href="javascript:;" class="weui-btn weui-btn_primary" style="width:90%; color:#000;background-color:#00BFFF;" onclick="view_qrcode();">收款海报</a></div>
     </div>
 
     <div class="weui-flex">
@@ -83,7 +90,7 @@
                 <div class="weui-cell" style="margin-top:5%;">
                     <div class="weui-cell__hd"><label class="weui-label">背景图</label></div>
                     <div class="weui-cell__bd">
-                          <select class="form-control" style="width:90px;height:40px;" name="background" >
+                          <select class="form-control" style="width:90px;height:40px;" name="background" id="background">
                             <option style="background-color:#1E90FF;" value="#1E90FF">道奇蓝 </option>
                             <option style="background-color:#5F9EA0;" value="#5F9EA0">军服蓝 </option>
                             <option style="background-color:#008B8B;" value="#008B8B">暗青色 </option>
@@ -93,11 +100,15 @@
                             <option style="background-color:#A0522D" value="#A0522D">黄土赭 </option>
                             <option style="background-color:#8B008B" value="#8B008B">深洋红色 </option>
                             <option style="background-color:#708090;" value="#708090">石板灰 </option>
-                            <option style="background-color:#2F4F4F" value="#2F4F4F">深石板灰 </option>
+                            <option style="background-color:#A9A9A9" value="#A9A9A9">深石板灰 </option>
                             <option style="background-color:#000000" value="#000000">纯黑 </option>
                         </select>
+
                     </div>
+                    <div id="view-bgcolor" style="width:60px;height:20px;background-color:#1E90FF;"></div>
+
                 </div>
+
 
             </div>
          </div>

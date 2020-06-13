@@ -35,16 +35,29 @@ def generate_pic(request):
         if upload_qrcode.name.split('.')[-1] not in ['jpeg', 'jpg', 'png']:
             return HttpResponse('上传的文件必须是图片')
 
+    params = {
+        'title': title,
+        'link_url': link_url,
+        'qrcode': upload_qrcode,
+        'background': background
+    }
+    Strpic.objects.create(**params)
+
+    obj = Strpic.objects.all().first()
+    from easy_thumbnails.files import get_thumbnailer
+    path = get_thumbnailer(obj.qrcode)['avatar'].url
+    print('==========',path)
+
     context = dict()
-    context['title'] = title[:26] if title else None
-    context['background'] = background
+    context['title'] = obj.title[:45] if obj.title else None
+    context['background'] = obj.background
 
     if upload_qrcode:
         context['prompt'] = '长按或扫一扫进行付款'
-        context['qrcode'] = '/media/upload_qrcode/' + upload_qrcode_name
+        context['qrcode'] = path
 
     if link_url:
-        context['link_url'] = link_url[:50]
+        context['link_url'] = obj.link_url[:50]
         context['prompt'] = '长按识别二维码打开链接'
         context['qrcode'] = '/media/generate_qrcode/'+title[:5]+"_"+now+'.png'
     return render(request, 'result.html', context)

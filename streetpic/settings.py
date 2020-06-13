@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mainsite',
+    'easy_thumbnails',
 ]
 
 MIDDLEWARE = [
@@ -131,3 +132,8 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'media/')
 )
 
+THUMBNAIL_ALIASES = {
+    '': {
+        'avatar': {'size': (250, 250), 'crop': True},
+    },
+}

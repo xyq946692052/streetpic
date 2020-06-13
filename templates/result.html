@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load thumbnail %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="user-scalable=no" />
@@ -13,23 +14,23 @@
 
 <style>
        #link-div{
-           width:320px;
+           width:480px;
            margin:0px 1px;
            z-index:10;
            height:90px;
            padding-top:10px;
            padding-right:10px;
            position:absolute;
-           bottom: 150px;
+           bottom: 360px;
         }
         #code-div{   
-           width:90%;
+           width:780px;
            margin:0px 1px;
            z-index:10;
-           height:120px;
+           height:260px;
            padding-top:10px;
            position:absolute;
-           bottom:30px;
+           bottom:20px;
            background-color:#F5F5F5;
            opacity:0.87;
            filter:alpha(opacity=67);
@@ -53,10 +54,10 @@ function gener_pic(){
         html2canvas(source).then(function(canvas) {
             var imageData = canvas.toDataURL(1);
             image.src = imageData;
-    });
+         });
     }
-     $("#haibao").css("display", "none");
-	}
+    $("#haibao").css("display", "none");
+}
 
 </script>
 
@@ -64,47 +65,47 @@ function gener_pic(){
 <body style="background-color: #FAFAFA;">
 
 
-<div style="padding-top:8%; width:80%; letter-spacing:4px;margin: 0 auto;">
+<div style="padding-top:8%; width:85%; letter-spacing:4px;margin: 0 auto;">
 
     <div class="weui-flex" >
-        <div style="margin: 0 auto;"><h2 style="color:#696969;">地摊海报</h2></div>
+        <div style="margin: 0 auto;"><span style="color:#696969; font-size:5.2em;font-weight:bold;">地摊海报</span></div>
     </div>
 
-    <hr style="background:#F5F5F5;height: 2px;border:none; margin-top:2px;"/><br>
-    <div class="weui-flex" style="padding-top:5%; text-align:center;">
-        <div class="weui-flex__item"><a href="/" class="weui-btn weui-btn_default" style="width:90%;" >重新生成</a></div>
-        <div class="weui-flex__item"><a href="javascript:;" class="weui-btn weui-btn_primary" style="width:90%; background-color:#C0C0C0" onclick="gener_pic();">转成图片</a></div>
+    <hr style="background:#F5F5F5;height: 10px;border:none; margin-top:2px;"/><br>
+
+    <div class="weui-flex" style="padding-top:1%; text-align:center;">
+        <div class="weui-flex__item" style="height:100px; width:400px;"><a href="/" class="weui-btn weui-btn_default" style="height:100px; width:400px; font-size:2.5em;background-color:#7FFFAA" >重新生成</a></div>
+        <div class="weui-flex__item" style="height:100px; width:400px;"><a href="javascript:;" class="weui-btn weui-btn_primary" style="height:100px; width:400px;font-size:2.5em; color:#000;background-color:#00BFFF;" onclick="gener_pic();">转成图片</a></div>
     </div>
 
+    <div style="margin:2% auto;padding:3%;">
+             <img id="img" class="img" width="800px;" height="1000px" style="display:none;"/>
+    </div>
+    <div id="haibao" style="background-color: {{background}};color:#fff; width:800px;height:1000px;position:relative; margin:1px auto; padding:2%;">
+        <div class="panel-body">
+            <div >
+                 <div class="title-div" style="padding:1.5%" >
+                     <span style="line-height:1.4;font-size:5.8em;font-weight:bold;">{{ title }}</span>
+                 </div>
 
-        <div style="margin: 2% auto;">
-             <img id="img" class="img" width="100%" style="display:none;"/>
-        </div>
-        <div id="haibao" style="background-color: {{background}};color:#fff; width:90%;height:600px;position:relative; margin: 2% auto; padding:5%;">
-            <div class="panel-body">
-                <div >
-                     <div class="title-div" style="font-family: Microsoft Yahei;">
-                         <h1 style="line-height:1.5;">{{ title }}</h1>
+                 {% if link_url %}
+                    <div id="link-div">
+                        <div style="font-size:2.4em; color:#D3D3D3; width:750px;">{{link_url}}</div>
+                    </div>
+                 {% endif %}
+
+                 <div id="code-div">
+                     <div style="float:left; margin-left:5px;">
+                                <img src="{{qrcode}}" alt="" />
+                         &nbsp;&nbsp;
                      </div>
-
-                     {% if link_url %}
-                        <div id="link-div">
-                            <div><h4>{{link_name}}</h4></div>
-                            <div style="font-size:10px;">{{link_url}}</div>
-                        </div>
-                     {% endif %}
-
-                     <div id="code-div">
-                         <div style="float:left; margin-left:5px;">
-                             <img src="{{qrcode}}" width="100px" height="100px">&nbsp;&nbsp;
-                         </div>
-                         <div style="margin-left:1%;">
-                             <h4>{{prompt}}</h4>
-                         </div>
+                     <div style="margin-left:1%;width:795px;">
+                         <span style="font-size: 3.2em; font-weight:bold;">{{prompt}}</span>
                      </div>
-                </div>
+                 </div>
             </div>
         </div>
+    </div>
 
 </div>
 
