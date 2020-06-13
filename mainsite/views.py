@@ -1,6 +1,7 @@
 
 import os
 import qrcode
+from easy_thumbnails.files import get_thumbnailer
 from datetime import datetime
 from django.conf import settings
 from django.shortcuts import render
@@ -44,20 +45,20 @@ def generate_pic(request):
     Strpic.objects.create(**params)
 
     obj = Strpic.objects.all().first()
-    from easy_thumbnails.files import get_thumbnailer
-    path = get_thumbnailer(obj.qrcode)['avatar'].url
-    print('==========',path)
+
+
 
     context = dict()
     context['title'] = obj.title[:45] if obj.title else None
     context['background'] = obj.background
 
     if upload_qrcode:
+        path = get_thumbnailer(obj.qrcode)['avatar'].url
         context['prompt'] = '长按或扫一扫进行付款'
         context['qrcode'] = path
 
     if link_url:
         context['link_url'] = obj.link_url[:50]
         context['prompt'] = '长按识别二维码打开链接'
-        context['qrcode'] = '/media/generate_qrcode/'+title[:5]+"_"+now+'.png'
+        context['qrcode'] = '/media/generate_qrcode/'+obj.title[:5]+"_"+now+'.png'
     return render(request, 'result.html', context)
