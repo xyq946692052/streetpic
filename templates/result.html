@@ -14,27 +14,27 @@
 
 <style>
        #link-div{
-           width:480px;
+           width:850px;
            margin:0px 1px;
            z-index:10;
            height:90px;
            padding-top:10px;
            padding-right:10px;
            position:absolute;
-           bottom: 360px;
+           bottom: 320px;
         }
         #code-div{   
-           width:780px;
+           width:850px;
            margin:0px 1px;
            z-index:10;
-           height:260px;
+           height:270px;
            padding-top:10px;
            position:absolute;
            bottom:20px;
-           background-color:#F5F5F5;
+           background-color:#F8F8F8;
            opacity:0.87;
            filter:alpha(opacity=67);
-           color: #696969;
+           color: #A8A8A8;
         } 
 </style>
 <script>
@@ -49,7 +49,6 @@ window.onload = function(){
     //调用html2image方法
     html2image(element,image);
 
-
     function html2image(source,image) {
         html2canvas(source).then(function(canvas) {
             var imageData = canvas.toDataURL(1);
@@ -57,9 +56,6 @@ window.onload = function(){
          });
     }
     $("#haibao").css("display", "none");
-
-     $("#gener-pic").css("background-color", "#009933");
-     $("#reback").css("background-color", "#fff");
 }
 
 </script>
@@ -68,44 +64,46 @@ window.onload = function(){
 <body style="background-color: #FAFAFA;">
 
 
-<div style="padding-top:8%; width:85%; letter-spacing:4px;margin: 0 auto;">
+<div style="padding-top:8%; width:90%;margin: 0 auto;">
 
     <div class="weui-flex" >
-        <div style="margin: 0 auto;"><span style="color:#696969; font-size:4.8em;font-weight:bold;">地摊海报</span></div>
+        <div style="margin: 0 auto;"><span style="color:#696969; font-size:4.8em;font-weight:bold;letter-spacing:4px;">地摊海报</span></div>
     </div>
 
     <hr style="background:#F5F5F5;height: 10px;border:none; margin-top:2px;"/><br>
 
-    <div class="weui-flex" style="padding-top:1%; text-align:center;">
-        <div class="weui-flex__item" style="height:100px; width:400px;"><a href="/" id="reback" class="weui-btn weui-btn_default" style="height:100px; width:400px; font-size:2.5em;background-color:#009933" >重新生成</a></div>
+    <div style="margin:1% auto;">
+             <img id="img" class="img" width="900px;" height="1000px" style="display:none;"/>
     </div>
-
-    <div style="margin:2% auto;padding:3%;">
-             <img id="img" class="img" width="800px;" height="1000px" style="display:none;"/>
-    </div>
-    <div id="haibao" style="background-color: {{background}};color:#fff; width:800px;height:1000px;position:relative; margin:1px auto; padding:2%;">
+    <div id="haibao" style="background-color: {{background}};color:#fff; width:900px;height:1000px;position:relative; margin:1px auto; padding:2%;">
         <div class="panel-body">
             <div >
-                 <div class="title-div" style="padding:1.5%" >
-                     <span style="line-height:1.4;font-size:5.8em;font-weight:bold;">{{ title }}</span>
+                 <div class="title-div" style="padding:3.8%" >
+                     <span style="line-height:1.4;font-size:7.8em;font-weight:bold;letter-spacing:12px">{{ title }}</span>
                  </div>
 
                  {% if link_url %}
                     <div id="link-div">
-                        <div style="font-size:2.4em; color:#D3D3D3; width:750px;">{{link_url}}</div>
+                        <div style="font-size:2.4em; color:#D3D3D3; width:800px;">{{link_url}}</div>
                     </div>
                  {% endif %}
 
                  <div id="code-div">
                      <div style="float:left; margin-left:5px;">
-                                <img src="{{qrcode}}" alt="" width="250px" height="250px"/>
+                                <img src="{{qrcode}}" alt="" width="260px" height="260px"/>
                          &nbsp;&nbsp;
                      </div>
-                     <div style="margin-left:1%;width:795px;">
-                         <span style="font-size: 3.2em; font-weight:bold;">{{prompt}}</span>
+                     <div style="margin-left:3%;width:900px; padding:2%; ">
+                         <span style="font-size:3.8em; font-weight:bold; padding-right:2%;">{{prompt}}</span>
                      </div>
                  </div>
             </div>
+        </div>
+    </div>
+
+     <div class="weui-flex" >
+        <div style="margin: 0 auto;">
+            <span style="color:#696969; font-size:1.2em;"><a href="/" style="font-size:2em;" >点击重新生成</a></span>
         </div>
     </div>
 

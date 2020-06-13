@@ -46,7 +46,7 @@ def generate_pic(request):
     obj = Strpic.objects.all().first()
 
     context = dict()
-    context['title'] = obj.title[:45]
+    context['title'] = obj.title[:25]
     context['background'] = obj.background
 
     if upload_qrcode:
