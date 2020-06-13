@@ -55,7 +55,7 @@ def generate_pic(request):
         context['qrcode'] = path
 
     else:
-        context['link_url'] = obj.link_url[:50]
+        context['link_url'] = obj.link_url[:40]
         context['prompt'] = '长按识别二维码打开链接'
         context['qrcode'] = '/media/generate_qrcode/'+obj.title[:5]+"_"+now+'.png'
     print('--------------',now, context['qrcode'])
