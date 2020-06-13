@@ -16,6 +16,8 @@
         var link_name_div = $("#link-name-div");
         link_name_div.css('display','block');
         qrcode_div.css('display','none');
+        $("#link-haibao").css("background-color", "#009933");
+        $("#shoukuanma").css("background-color", "#00BFFF");
    }
 
    function view_qrcode(){
@@ -23,6 +25,8 @@
         var link_name_div = $("#link-name-div");
         link_name_div.css('display','none');
         qrcode_div.css('display','block');
+        $("#link-haibao").css("background-color", "#7FFFAA");
+        $("#shoukuanma").css("background-color", "#009933");
     }
 
     function confirm(){
@@ -52,8 +56,8 @@
 
     <hr style="background:#F5F5F5;height: 2px;border:none; margin-top:2px;"/><br>
     <div class="weui-flex" style="padding-top:5%; text-align:center;">
-        <div class="weui-flex__item"><a href="javascript:;" class="weui-btn weui-btn_default" style="width:90%;background-color:#7FFFAA" onclick="view_link();">链接海报</a></div>
-        <div class="weui-flex__item"><a href="javascript:;" class="weui-btn weui-btn_primary" style="width:90%; color:#000;background-color:#00BFFF;" onclick="view_qrcode();">收款海报</a></div>
+        <div class="weui-flex__item"><a href="javascript:;" id="link-haibao" class="weui-btn weui-btn_default" style="width:90%;background-color:#7FFFAA" onclick="view_link();">链接海报</a></div>
+        <div class="weui-flex__item"><a href="javascript:;" id="shoukuanma" class="weui-btn weui-btn_primary" style="width:90%; color:#000;background-color:#00BFFF;" onclick="view_qrcode();">收款海报</a></div>
     </div>
 
     <div class="weui-flex">
@@ -63,7 +67,7 @@
                 <div class="weui-cell">
                     <div class="weui-cell__hd"><label class="weui-label">标题</label></div>
                     <div class="weui-cell__bd">
-                        <input class="weui-input" type="text" placeholder="仅限25字数" name="title">
+                        <input class="weui-input" type="text" placeholder="仅限25字数" name="title"  required="required" oninvalid="setCustomValidity('请输入您的姓名');" >
                     </div>
                 </div>
 
@@ -71,7 +75,7 @@
                     <div class="weui-cell" style="margin-top:5%;" >
                         <div class="weui-cell__hd"><label class="weui-label">链接</label></div>
                         <div class="weui-cell__bd">
-                            <input class="weui-input" type="text" placeholder="输入链接" name="link_url">
+                            <input class="weui-input" type="text" placeholder="输入链接" name="link_url"  required="required">
                         </div>
                     </div>
                 </div>
