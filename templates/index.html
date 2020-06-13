@@ -17,7 +17,7 @@
         link_name_div.css('display','block');
         qrcode_div.css('display','none');
         $("#link-haibao").css("background-color", "#009933");
-        $("#shoukuanma").css("background-color", "#00BFFF");
+        $("#shoukuanma").css("background-color", "#fff");
    }
 
    function view_qrcode(){
@@ -25,7 +25,7 @@
         var link_name_div = $("#link-name-div");
         link_name_div.css('display','none');
         qrcode_div.css('display','block');
-        $("#link-haibao").css("background-color", "#7FFFAA");
+        $("#link-haibao").css("background-color", "#fff");
         $("#shoukuanma").css("background-color", "#009933");
     }
 
@@ -56,8 +56,8 @@
 
     <hr style="background:#F5F5F5;height: 2px;border:none; margin-top:2px;"/><br>
     <div class="weui-flex" style="padding-top:5%; text-align:center;">
-        <div class="weui-flex__item"><a href="javascript:;" id="link-haibao" class="weui-btn weui-btn_default" style="width:90%;background-color:#7FFFAA" onclick="view_link();">链接海报</a></div>
-        <div class="weui-flex__item"><a href="javascript:;" id="shoukuanma" class="weui-btn weui-btn_primary" style="width:90%; color:#000;background-color:#00BFFF;" onclick="view_qrcode();">收款海报</a></div>
+        <div class="weui-flex__item"><a href="javascript:;" id="link-haibao" class="weui-btn weui-btn_default" style="width:90%;background-color:#009933;" onclick="view_link();">链接海报</a></div>
+        <div class="weui-flex__item"><a href="javascript:;" id="shoukuanma" class="weui-btn weui-btn_default" style="width:90%; color:#000;" onclick="view_qrcode();">收款海报</a></div>
     </div>
 
     <div class="weui-flex">
